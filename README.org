@@ -179,6 +179,16 @@ bienvenida de la unam. Es tiempo de realizar más cambios al archivo
 
 ** Página estática
 
+Para este punto haremos uso de un prepocesador de CSS para optimizar
+nuestro tiempo y generar un archivo de estilos muy compactos que será
+servido al cliente. El prepocesador utilizado en este repositorio será
+[[https://webpack.js.org/][webpack]]. Otra dependencia nueva es [[https://pm2.keymetrics.io/][pm2]] es un programa similar a
+=ngrok=, pm2 se encargará de administrar cualquier cosas que nuestra
+aplicación necesite.
+
+El primer paso de esta sección será generar el webhook para que
+interactúe con =pm2=.
+
 ** Página dinámica
 
 
