@@ -322,8 +322,77 @@ npm install
 pm2 start server.js --name api
 #+END_SRC
 
-A continuación debemos crear un =webhook= en github.
+A continuación debemos crear un =webhook= en github. Para ello ejecutamos:
 
+#+BEGIN_SRC bash
+cd ~
+./ngrok http 3000
+#+END_SRC
+
+Antes de ejecutar el webhooj instalaremos la dependencia =npm i
+gmail-send=, modificaremos el archivo
+=/var/www/html/vw-webhook/server.js=:
+
+#+BEGIN_SRC js
+var express = require('express')
+var bodyParser = require('body-parser')
+var childProcess = require('child_process');
+var app = express()
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+app.post('/visibilidad', function (req, res) {
+    console.log(req.body.ref)
+    console.log(req.body.sender.login)
+    deploy(res, './deploy.sh')
+});
+
+app.post('/api', function (req, res) {
+    console.log(req.body.ref)
+    console.log(req.body.sender.login)
+    deploy(res, './api.sh')
+});
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+});
+
+function deploy(res, script){
+  childProcess.exec(script, function(err, stdout, stderr){
+      if (err) {
+        console.error(err);
+        return res.sendStatus(500);
+      }
+      console.log("se completo el deploy")
+      res.sendStatus(200);
+    });
+}
+#+END_SRC
+
+Ahora creamos un nuevo archivo =api.sh= en la carpeta
+=/var/www/html/vw-webhook=:
+
+#+BEGIN_SRC bash
+cd /var/www/html/vw-api
+
+echo "Pulling from Master"
+
+git pull origin master
+pm2 restart api-prod
+echo "Pulled successfully from master"
+
+#+END_SRC
+
+Entramos a la página de webhooks de GitHub e insertamos la url que nos
+dió =ngrok= con =/api= al final:
+
+#+BEGIN_SRC bash
+https://b284e0d2.ngrok.io/api
+#+END_SRC
 
 ** Página dinámica
 
