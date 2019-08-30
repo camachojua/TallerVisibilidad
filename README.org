@@ -71,7 +71,21 @@ git clone https://github.com/camachojua/TallerVisibilidad.git
 Ahora hay que levantar un *webhook* en github, para iremos a este
  [[https://github.com/arturo8gll][perfil de github]], donde se encontrarán varios repositorios de esos se
  hará un *fork* a este [[al][repositorio]], al terminar se creará una copia de
- ese repositorio en tu perfil de github.
+ ese repositorio en tu perfil de github, posteriormente se clonará el
+ repositorio usando ssh:
+
+#+BEGIN_SRC bash
+cd /var/www/html
+git clone git@github.com:camachojua/vw-webhook.git
+cd vw-webhook
+#+END_SRC
+
+El proyecto =vw-webhook= esta desarrollado en =node=, para poder
+utilizarlo debemos ejecutar el comando:
+
+#+BEGIN_SRC bash
+npm install
+#+END_SRC
 
 ** Página estática
 
