@@ -152,8 +152,30 @@ echo "<h1>UNAM</h1>" >> local/dist
 
 Posteriormente revisaremos el estado del repositorio con =git status=
 agregaremos los cambios realizados con =git add local= y
-posteriormente haremos un commit con =git commit=.
+posteriormente haremos un commit con =git commit -m=. Cuando hagamos
+un =git push= el webhook responderá apropiadamente y copiará la
+información correspondiente dentro de la carpeta =/var/www/html= (vía
+un =git pull=) de forma automática.
 
+Para que todo se vea automático se modificará la configuración de
+apache para que apunte al archivo =index.html= del repositorio
+almacenado en =/var/www/html/TallerVisibilidad/=. Se modificará el
+archivo =/etc/apache2/sites-enabled/000-default.conf=, el cambio será:
+
+#+BEGIN_SRC diff
++ DocumentRoot /var/www/html/TallerVisibilidad/local/dist
+- DocumentRoot /var/www/html
+#+END_SRC
+
+Por último se debe reiniciar el servidor apache:
+
+#+BEGIN_SRC bash
+systemctl restart apache2
+#+END_SRC
+
+Al recargar el servidor apache se debe mostrar una página de
+bienvenida de la unam. Es tiempo de realizar más cambios al archivo
+=index.html= del repositorio almacenado en la carpeta =/home=
 
 ** Página estática
 
