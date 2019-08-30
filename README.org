@@ -1,0 +1,44 @@
+* Taller de Visibilidad Web
+
+** Tecnologías
+
+- Linux
+- Git
+- Nodejs
+- Apache
+- MariaDB
+- Ngrok
+- Gmail
+
+** Instalación y configuración
+
+Antes de iniciar, se debe asegurar que se tiene acceso de
+administrador =root= en la máquina que se trabajará
+
+#+BEGIN_SRC bash
+  sudo apt update
+  sudo apt install -y mariadb-server git apache2 nodejs npm gnupg2
+  sudo systemctl start mariadb
+  sudo systemctl start apache2
+  sudo mysql_secure_installation
+  ssh-keygen
+#+END_SRC
+
+En el último paso estableceremos la nueva contraseña de =root=,
+eliminar las bases de datos por defecto y recargar los
+privilegios. Para fines didácticos necesitamos crear dos carpetas:
+=local= y =server=. Es momento de copiar nuestra llave pública
+=id_rsa.pub=, para ello se debe ejecutar el comando:
+
+#+BEGIN_SRC bash
+cat ~/.ssh/id_rsa.pub
+#+END_SRC
+
+El contenido debe ser copiado y pegado en el prefil de github del
+usuario, esta configuración se hace en este [[por medio de ][enlace]].
+
+** Página estática
+
+** Página dinámica
+
+
