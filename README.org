@@ -206,9 +206,75 @@ Procedemos a hacer fork a este [[|          |    |         |      |     |       
 
 #+BEGIN_SRC bash
 cd ~
-git clone git@github.com:camachojua/vw-api.git
+ogit clone git@github.com:camachojua/vw-api.git
 /var/www/html
 git clone git@github.com:camachojua/vw-api.git
+#+END_SRC
+
+Para que este programa pueda ejecutarse hay que ejecutar =npm install=
+
+#+BEGIN_SRC bash
+cd ~/vw-api
+npm install
+#+END_SRC
+
+El API está definido en el archivo =server.js= se puede notar que hace
+uso del puerto *3010* para servir.
+
+#+BEGIN_SRC js
+var express = require('express')
+var app = express()
+const path = require('path')
+var bodyParser = require('body-parser')
+
+var controllerRouter = require('./routes/tarea')
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug')
+app.use(express.static(path.join(__dirname, 'public')))
+
+app.use('/tarea', controllerRouter)
+
+app.get('/', function (req, res) {
+  res.render('index')
+})
+
+app.listen(3010, function () {
+  console.log('Example app listening on port 3010!')
+})
+#+END_SRC
+
+Posteriormente ejecutamos el programa con =node server.js=, finalmente
+podemos ver el programa en acción si nos dirigimos a =localhost:3010=
+en el navegador. Esta aplicación hace uso de una base de datos, por lo
+que debemos crear una base para esta aplicación, para ello ejecutamos
+=mysql -u root -p=:
+
+#+BEGIN_SRC mysql
+CREATE DATABASE visibilidad;
+
+use visibilidad;
+
+CREATE TABLE IF NOT EXISTS tarea(
+  idTarea INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  descripcion varchar(80),
+  importancia INTEGER
+);
+#+END_SRC
+
+Una vez creada se debe llenar dicha base:
+
+#+BEGIN_SRC mysql
+INSERT INTO tarea VALUES(null,"Generar Reporte del año",1);
+INSERT INTO tarea VALUES(null,"Planchar traje para boda",2);
+INSERT INTO tarea VALUES(null,"Terminar tarea de calculo",3);
+INSERT INTO tarea VALUES(null,"Comprar comida",1);
 #+END_SRC
 
 
