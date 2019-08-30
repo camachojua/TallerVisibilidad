@@ -43,15 +43,31 @@ mkdir local && cd local
 git clone https://github.com/camachojua/TallerVisibilidad.git
 #+END_SRC
 
-El siguiente paso es configurar el servidor apache, para ello debemos
-cambiarnos al directorio de apache =/var/www/=, agregaremos al usuario
-local al grupo =www-data=.
+De nuevo, por fines didácticos se añadirá al usuario en curso al grupo
+=www-data=, con el fin de evitar problemas de permisos cuando se
+intente modificar un archivo. Para ello debemos cambiarnos al
+directorio de apache =/var/www/=, cambiar el grupo y usuario al que
+pertenece el directorio (de =root= a =www-data=) y por último
+agregaremos al usuario local al grupo =www-data=.
 
 #+BEGIN_SRC bash
 cd /var/www
+newgrp www-data
 sudo chown -R www-data:www-data .
+sudo chmod 775 -R /var/www/
 sudo usermod -a -G www-data usuario
 #+END_SRC
+
+Después de establecer los permisos hay que clonar el repositorio en la
+carpeta =/var/www/html/=:
+
+#+BEGIN_SRC bash
+cd /var/www
+sudo chmod -R 755 .
+sudo chmod -R 755 html
+git clone https://github.com/camachojua/TallerVisibilidad.git
+#+END_SRC
+
 
 ** Página estática
 
