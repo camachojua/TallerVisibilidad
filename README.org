@@ -187,7 +187,30 @@ servido al cliente. El prepocesador utilizado en este repositorio será
 aplicación necesite.
 
 El primer paso de esta sección será generar el webhook para que
-interactúe con =pm2=.
+interactúe con =pm2=:
+
+#+BEGIN_SRC bash
+cd /var/www/html/vw-webhook
+pm2 start server.js
+pm2 list
+#+END_SRC
+
+Si todo sale bien después de ejecutar =pm2 list= debemos obtener una
+salida similar a:
+
+| App name | id | version | mode | pid | status | restart | uptime | cpu | mem    | user | watch    |
+|----------+----+---------+------+-----+--------+---------+--------+-----+--------+------+----------|
+| server   |  0 |   1.0.0 | fork | 541 | online |       0 | 0s     |  0% | 21.0MB | juan | disabled |
+
+Procedemos a hacer fork a este [[|          |    |         |      |     |        |         |        |     |        |      |          |][repositorio]] y clonarlo en las carpetas:
+
+#+BEGIN_SRC bash
+cd ~
+git clone git@github.com:camachojua/vw-api.git
+/var/www/html
+git clone git@github.com:camachojua/vw-api.git
+#+END_SRC
+
 
 ** Página dinámica
 
