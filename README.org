@@ -177,6 +177,18 @@ Al recargar el servidor apache se debe mostrar una página de
 bienvenida de la unam. Es tiempo de realizar más cambios al archivo
 =index.html= del repositorio almacenado en la carpeta =/home=
 
+*** Resumen
+
+1. Existe una copia del código en el =/home= del usuario, típicamente
+   aquí haces tu desarrollo.
+2. Existe otra copia en =/var/www/= esta simula el ambiente del
+   *servidor*, el código de esta copia se actualiza despúes de haber
+   ejecutado un =commit= en la carpeta del punto anterior.
+3. Se creó un =webhook= en github para reaccionar cada vez que se
+   recibe un =commit=.
+4. La carpeta =vw-webhook= contiene el archivo =deploy.sh= encargado
+   de obtener la última versión del código automáticamente.
+
 ** Página estática
 
 Para este punto haremos uso de un prepocesador de CSS para optimizar
