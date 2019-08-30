@@ -68,6 +68,10 @@ sudo chmod -R 755 html
 git clone https://github.com/camachojua/TallerVisibilidad.git
 #+END_SRC
 
+Ahora hay que levantar un *webhook* en github, para iremos a este
+ [[https://github.com/arturo8gll][perfil de github]], donde se encontrarán varios repositorios de esos se
+ hará un *fork* a este [[al][repositorio]], al terminar se creará una copia de
+ ese repositorio en tu perfil de github.
 
 ** Página estática
 
