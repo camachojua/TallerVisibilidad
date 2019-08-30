@@ -87,6 +87,37 @@ utilizarlo debemos ejecutar el comando:
 npm install
 #+END_SRC
 
+El archivo =server.js= contiene el webhook necesario para lanzar un
+trabajo por lo tanto se debe ejecutar, posteriormente se hará uso de
+=ngrok= para publicar el puerto:
+
+#+BEGIN_SRC bash
+node server.js &
+~/ngrok http 3000
+#+END_SRC
+
+Al ejecutar el último comando se nos regresa una url donde podemos
+consultar nuestro servicio desde cualquier punto de interner, en este
+ejemplo =ngrok= devolvió:
+
+#+BEGIN_SRC bash
+ngrok by @inconshreveable
+(Ctrl+C to quit)
+Session Status                online
+Account                       Juan Alberto Camacho Bolaños (Plan: Free)
+Version                       2.3.34
+Region                        United States (us)
+Web Interface                 http://127.0.0.1:4040
+Forwarding                    http://33756b11.ngrok.io -> http://localhost:3000
+Forwarding                    https://33756b11.ngrok.io -> http://localhost:3000
+#+END_SRC
+
+Es momento de ir al repositorio que se creó [[https://github.com/camachojua/TallerVisibilidad.git][inicialmente]] y crear un
+[[webhook][webhook]], insertamos el valor que nos devuelve =ngrok=:
+=https://33756b11.ngrok.io/visibilidad= con el *content-type*
+=application/json=, verificación de certificado habilitada y el tipo
+de evento enviado como *push*
+
 ** Página estática
 
 ** Página dinámica
