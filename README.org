@@ -382,9 +382,35 @@ cd /var/www/html/vw-api
 echo "Pulling from Master"
 
 git pull origin master
-pm2 restart api-prod
+
 echo "Pulled successfully from master"
 
+pm2 restart api-prod
+
+echo "API restarted"
+#+END_SRC
+
+Por último modificamos la función =api= del archivo
+=/var/www/html/vw-webhook/server.js=:
+
+#+BEGIN_SRC js
+app.post('/api', function (req, res) {
+    console.log(req.body.ref)
+    console.log(req.body.sender.login)
+    deploy(res, './api.sh')
+    const send = require('gmail-send')({
+        user: 'user@gmail.com',
+        pass: 'supersecret',
+        to: 'anotherone@ciencias.unam.mx',
+        subject: 'Deployment complete!'
+    });
+    send({
+        text:    'This deploy was successful!!',  
+    }, (error, result, fullResult) => {
+        if (error) console.error(error);
+        console.log(result);
+    })
+});
 #+END_SRC
 
 Entramos a la página de webhooks de GitHub e insertamos la url que nos
