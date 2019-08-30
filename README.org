@@ -303,6 +303,24 @@ resultado:
 {"idTarea":4,"descripcion":"Comprar comida","importancia":1}]
 #+END_SRC
 
+Para obtener los cambios hacemos un =git pull= en la carpeta del api
+del servidor.
+
+#+BEGIN_SRC bash
+cd /var/www/html/vw-api
+git pull
+#+END_SRC
+
+Cuando todo está ejecutándose de manera exitosa estamos listos para
+ejecutar el programa con =pm2= para hacerlo es necesario martar el
+proceso que iniciamos con =node server.js= y levantarlo de nuevo
+utilizando =pm2=:
+
+#+BEGIN_SRC bash
+cd /var/www/html/vw-api
+pm2 start server.js --name api
+#+END_SRC
+
 
 ** Página dinámica
 
