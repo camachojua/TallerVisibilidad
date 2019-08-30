@@ -420,6 +420,9 @@ dió =ngrok= con =/api= al final:
 https://b284e0d2.ngrok.io/api
 #+END_SRC
 
+Por último salvamos el archivo y ejecutamos un =push= en =~/vw-api=
+debemos recibir un correo.
+
 ** Página dinámica
 
 
