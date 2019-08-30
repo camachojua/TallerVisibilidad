@@ -318,8 +318,11 @@ utilizando =pm2=:
 
 #+BEGIN_SRC bash
 cd /var/www/html/vw-api
+npm install
 pm2 start server.js --name api
 #+END_SRC
+
+A continuación debemos crear un =webhook= en github.
 
 
 ** Página dinámica
