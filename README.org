@@ -116,7 +116,44 @@ Es momento de ir al repositorio que se creó [[https://github.com/camachojua/Tal
 [[webhook][webhook]], insertamos el valor que nos devuelve =ngrok=:
 =https://33756b11.ngrok.io/visibilidad= con el *content-type*
 =application/json=, verificación de certificado habilitada y el tipo
-de evento enviado como *push*
+de evento enviado como *push*, por último hay que dar clic en *add webhook*.
+
+En la ventana de ejecución de =ngrok= debió aparecer un mensaje similar a:
+
+#+BEGIN_SRC bash
+HTTP Requests
+-------------
+POST /visibilidad              200 OK      
+#+END_SRC
+
+Ahora hay que editar el archivo =deploy.sh=, la primer línea debe
+apuntar a la carpeta =~/TallerVisibilidad=
+
+#+BEGIN_SRC bash
+cd ~/TallerVisibilidad
+
+echo "Pulling from Master"
+
+git pull origin master
+
+echo "Pulled successfully from master"
+#+END_SRC
+
+Y después ejecutamos el archivo =/var/www/html/vw-webhook/deploy.sh=
+para comprobar su buen funcionamento. Una vez comprobado el
+funcionamiento hay que cambiarnos al directorio que contiene el código
+del primer repositorio que creamos (=TallerVisibilidad=):
+
+#+BEGIN_SRC bash
+cd ~/TallerVisibilidad/
+mkdir local/dist
+echo "<h1>UNAM</h1>" >> local/dist
+#+END_SRC
+
+Posteriormente revisaremos el estado del repositorio con =git status=
+agregaremos los cambios realizados con =git add local= y
+posteriormente haremos un commit con =git commit=.
+
 
 ** Página estática
 
