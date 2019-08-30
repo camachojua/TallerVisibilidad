@@ -35,7 +35,23 @@ cat ~/.ssh/id_rsa.pub
 #+END_SRC
 
 El contenido debe ser copiado y pegado en el prefil de github del
-usuario, esta configuración se hace en este [[por medio de ][enlace]].
+usuario, esta configuración se hace en este [[por medio de ][enlace]]. Antes de comenzar
+a escribir código es necesario crear un repositorio y clonarlo:
+
+#+BEGIN_SRC bash
+mkdir local && cd local
+git clone https://github.com/camachojua/TallerVisibilidad.git
+#+END_SRC
+
+El siguiente paso es configurar el servidor apache, para ello debemos
+cambiarnos al directorio de apache =/var/www/=, agregaremos al usuario
+local al grupo =www-data=.
+
+#+BEGIN_SRC bash
+cd /var/www
+sudo chown -R www-data:www-data .
+sudo usermod -a -G www-data usuario
+#+END_SRC
 
 ** Página estática
 
