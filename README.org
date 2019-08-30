@@ -277,6 +277,20 @@ INSERT INTO tarea VALUES(null,"Terminar tarea de calculo",3);
 INSERT INTO tarea VALUES(null,"Comprar comida",1);
 #+END_SRC
 
+Las credenciales de ingreso a la base de datos se encuenta en
+=connect/db.js=, antes de poder seguir se deben ajustar para que
+concuerden con la instalación que realizaste. Para comprobar que todo
+funciona correctamente se debe ejecutar =node server.js=, ir al
+navegador (=localhost:3010/tarea=). El ejemplo debe regresar como
+resultado:
+
+#+BEGIN_SRC json
+[{"idTarea":1,"descripcion":"Generar Reporte del año","importancia":1},
+{"idTarea":2,"descripcion":"Planchar traje para boda","importancia":2},
+{"idTarea":3,"descripcion":"Terminar tarea de calculo","importancia":3},
+{"idTarea":4,"descripcion":"Comprar comida","importancia":1}]
+#+END_SRC
+
 
 ** Página dinámica
 
